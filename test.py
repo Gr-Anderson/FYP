@@ -1,88 +1,77 @@
-import csv
+from __future__ import division, print_function
+import pandas as pd
+import numpy as np
+from numpy.random import randn
+from numpy.fft import rfft
+from scipy import signal
+import matplotlib.pyplot as plt
+from matplotlib.pyplot import figure
 
-with open("test.csv", "r") as f:
-    reader = csv.reader(f)
-    your_list = list(reader)
+figure(num=None, figsize=(20, 10), dpi=80, facecolor="w", edgecolor="k")
 
-print(your_list)
+b, a = signal.butter(4, 0.25, analog=False)
 
+# Show that frequency response is the same
+impulse = np.zeros(1000)
+impulse[500] = 1
+
+# Applies filter forward and backward in time
+imp_ff = signal.filtfilt(b, a, impulse)
+
+# sig = np.cumsum(randn(800))  # Brownian noise
+data = pd.read_csv("test12.csv")
+sig = data["voltage"]
+
+sig_ff = signal.filtfilt(b, a, sig)
+
+# plt.plot(sig, color="red", label="Original", linewidth=3)
+# plt.plot(voltage, color="silver", label="Original")
+
+plt.plot(sig_ff, color="#3465a4", label="filtfilt", linewidth=5)
+plt.grid(True, which="both")
+
+
+plt.savefig("test02.png")
+plt.tight_layout()
+plt.show()
+
+# from __future__ import division, print_function
+# import numpy as np
+# from numpy.random import randn
+# from numpy.fft import rfft
 # from scipy import signal
 # import matplotlib.pyplot as plt
-# import numpy as np
 
-# t = np.linspace(0, 1.0, 2001)
-# xlow = np.sin(2 * np.pi * 5 * t)
-# xhigh = np.sin(2 * np.pi * 250 * t)
-# x = xlow + xhigh
+# b, a = signal.butter(4, 0.03, analog=False)
 
-# b, a = signal.butter(8, 0.125)
-# y = signal.filtfilt(b, a, x, padlen=150)
-# np.abs(y - xlow).max()
+# # Show that frequency response is the same
+# impulse = np.zeros(1000)
+# impulse[500] = 1
 
-# b, a = signal.ellip(4, 0.01, 120, 0.125)  # Filter to be applied.
-# np.random.seed(123456)
+# # Applies filter forward and backward in time
+# imp_ff = signal.filtfilt(b, a, impulse)
 
-# n = 60
-# sig = np.random.randn(n) ** 3 + 3 * np.random.randn(n).cumsum()
+# # Applies filter forward in time twice (for same frequency response)
+# imp_lf = signal.lfilter(b, a, signal.lfilter(b, a, impulse))
 
-# fgust = signal.filtfilt(b, a, sig, method="gust")
-# fpad = signal.filtfilt(b, a, sig, padlen=50)
-# plt.plot(sig, "k-", label="input")
-# plt.plot(fgust, "b-", linewidth=4, label="gust")
-# plt.plot(fpad, "c-", linewidth=1.5, label="pad")
+# plt.subplot(2, 2, 1)
+# plt.semilogx(20*np.log10(np.abs(rfft(imp_lf))))
+# plt.ylim(-100, 20)
+# plt.grid(True, which='both')
+# plt.title('lfilter')
+
+# plt.subplot(2, 2, 2)
+# plt.semilogx(20*np.log10(np.abs(rfft(imp_ff))))
+# plt.ylim(-100, 20)
+# plt.grid(True, which='both')
+# plt.title('filtfilt')
+
+# sig = np.cumsum(randn(800))  # Brownian noise
+# sig_ff = signal.filtfilt(b, a, sig)
+# sig_lf = signal.lfilter(b, a, signal.lfilter(b, a, sig))
+# plt.subplot(2, 1, 2)
+# plt.plot(sig, color='silver', label='Original')
+# plt.plot(sig_ff, color='#3465a4', label='filtfilt')
+# plt.plot(sig_lf, color='#cc0000', label='lfilter')
+# plt.grid(True, which='both')
 # plt.legend(loc="best")
-# plt.show()
-
-# import matplotlib.pyplot as plt  # For plotting
-# from math import sin, pi  # For generating input signals
-# import sys  # For reading command line arguments
-
-# ### Filter - 6KHz->8Khz Bandpass Filter
-# ### @param [in] input - input unfiltered signal
-# ### @param [out] output - output filtered signal
-# def filter(x):
-#     y = [0] * 48000
-#     for n in range(4, len(x)):
-#         y[n] = (
-#             0.0101 * x[n]
-#             - 0.0202 * x[n - 2]
-#             + 0.0101 * x[n - 4]
-#             + 2.4354 * y[n - 1]
-#             - 3.1869 * y[n - 2]
-#             + 2.0889 * y[n - 3]
-#             - 0.7368 * y[n - 4]
-#         )
-#     return y
-
-
-# ###Read in desired frequency from command line
-# frequency = int(sys.argv[1])
-
-# ### Create empty arrays
-# input = [0] * 48000
-# output = [0] * 48000
-
-# ### Fill array with xxxHz signal
-# for i in range(48000):
-#     input[i] = sin(2 * pi * frequency * i / 48000)  # + sin(2 * pi * 70 * i / 48000)
-
-# ### Run the signal through the filter
-# output = filter(input)
-
-# ### Grab samples from input and output #1/100th of a second
-# output_section = output[0:480]
-# input_section = input[0:480]
-
-# ### Plot the signals for comparison
-# plt.figure(1)
-# plt.subplot(211)
-# plt.ylabel("Magnitude")
-# plt.xlabel("Samples")
-# plt.title("Unfiltered Signal")
-# plt.plot(input_section)
-# plt.subplot(212)
-# plt.ylabel("Magnitude")
-# plt.xlabel("Samples")
-# plt.title("Filtered Signal")
-# plt.plot(output_section)
-# plt.show()
