@@ -53,7 +53,7 @@ class BiometricSignal:
         return filtered_signal
     
     
-    def find_r_peaks(self):
+    def find_r_peaks(self, filtered_signal):
         
         threshold = 400
         start = 400
@@ -63,7 +63,6 @@ class BiometricSignal:
         no_of_rows = amended_signal.shape[0]
         line_numbers = []
         theVoltage = []
-
 
         for i in range(0, no_of_rows):
             if amended_signal[i] > threshold:
@@ -77,4 +76,52 @@ class BiometricSignal:
 
         r_peaks = argrelextrema(ecg_plot, np.greater, order=5)
         
-        return r_peaks
+        return r_peaks, amended_signal
+
+
+class BiometricSegment:
+    
+    # ----------------------------------------------------
+    # --------------Combining Segments -------------------
+    # ----------------------------------------------------
+
+    combined_seg_does_not_exist = True
+
+    smallest_seg = None
+
+    i = 0
+
+    for i in range (0, 5):
+
+        segment_start = r_peaks[0][i]
+        segment_end = r_peaks[0][i+1]
+        
+
+    #     extracted_segment = amended_sig[segment_start:segment_end]
+    #     if smallest_seg == None:
+    #         smallest_seg = len(extracted_segment)
+
+    #     elif (len(extracted_segment) < smallest_seg):
+    #         smallest_seg = len(extracted_segment)
+
+        
+        
+    #     if combined_seg_does_not_exist:
+    #         combined_seg = np.zeros(len(extracted_segment) + 100)
+    #         combined_seg_does_not_exist = False
+    #     for j in range(0,len(extracted_segment)):
+    #         combined_seg[j] =  combined_seg[j] + extracted_segment[j]
+
+
+
+# ----------------------------------------------------------------------------------------------
+#                                       CODE FOR TESTING
+# ----------------------------------------------------------------------------------------------
+
+testSignal = BiometricSignal()
+
+filtered_signal = testSignal.filter_captured_signal()
+
+r_peaks = testSignal.find_r_peaks(filtered_signal)
+
+print (r_peaks)
