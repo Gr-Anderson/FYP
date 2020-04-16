@@ -1,9 +1,8 @@
-import time
 import serial
+import time
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
 from scipy import signal
+import numpy as np
 from scipy.signal import argrelextrema
 
 class BiometricSignal: 
@@ -11,8 +10,12 @@ class BiometricSignal:
     captured_signal_csv = "./assets/subject_raw_ecg.csv"
 
     def __init__(self):
-        self.bio_signal = "test"
-
+#         self.capture_signal = capture_signal()
+        self.filtered_signal = []
+        self.amended_signal = []
+        self.r_peaks = []
+        
+        
     def capture_signal(self):
         serial_data = serial.Serial("/dev/ttyACM1", 9600)
         serial_list = []
@@ -49,20 +52,27 @@ class BiometricSignal:
         numerator, denominator = signal.butter(4, 0.25, analog=False)
         data = pd.read_csv(BiometricSignal.captured_signal_csv)
         sig = data["voltage"]
-        filtered_signal = signal.filtfilt(numerator, denominator, sig)
-        return filtered_signal
+        self.filtered_signal = signal.filtfilt(numerator, denominator, sig)
+        return self.filtered_signal
     
-    
-    def find_r_peaks(self, filtered_signal):
-        
-        threshold = 400
+    def amend_signal(self, filtered_signal):
+#         threshold = 400
         start = 400
         end = -100
+        self.amended_signal = filtered_signal[start:end]
+        return self.amended_signal
+    
+    def find_r_peaks(self, filtered_signal, amended_signal):
         
-        amended_signal = filtered_signal[start:end]
+        threshold = 400
+#         start = 400
+#         end = -100
+        
+#         amended_signal = amend_signal(filtered_signal)
         no_of_rows = amended_signal.shape[0]
         line_numbers = []
         theVoltage = []
+
 
         for i in range(0, no_of_rows):
             if amended_signal[i] > threshold:
@@ -74,54 +84,6 @@ class BiometricSignal:
 
         ecg_plot = np.concatenate((theVoltage, line_numbers))
 
-        r_peaks = argrelextrema(ecg_plot, np.greater, order=5)
+        self.r_peaks = argrelextrema(ecg_plot, np.greater, order=5)
         
-        return r_peaks, amended_signal
-
-
-class BiometricSegment:
-    
-    # ----------------------------------------------------
-    # --------------Combining Segments -------------------
-    # ----------------------------------------------------
-
-    combined_seg_does_not_exist = True
-
-    smallest_seg = None
-
-    i = 0
-
-    for i in range (0, 5):
-
-        segment_start = r_peaks[0][i]
-        segment_end = r_peaks[0][i+1]
-        
-
-    #     extracted_segment = amended_sig[segment_start:segment_end]
-    #     if smallest_seg == None:
-    #         smallest_seg = len(extracted_segment)
-
-    #     elif (len(extracted_segment) < smallest_seg):
-    #         smallest_seg = len(extracted_segment)
-
-        
-        
-    #     if combined_seg_does_not_exist:
-    #         combined_seg = np.zeros(len(extracted_segment) + 100)
-    #         combined_seg_does_not_exist = False
-    #     for j in range(0,len(extracted_segment)):
-    #         combined_seg[j] =  combined_seg[j] + extracted_segment[j]
-
-
-
-# ----------------------------------------------------------------------------------------------
-#                                       CODE FOR TESTING
-# ----------------------------------------------------------------------------------------------
-
-testSignal = BiometricSignal()
-
-filtered_signal = testSignal.filter_captured_signal()
-
-r_peaks = testSignal.find_r_peaks(filtered_signal)
-
-print (r_peaks)
+        return self.r_peaks

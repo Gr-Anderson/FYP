@@ -1,23 +1,30 @@
+from flask import Flask, render_template, request, jsonify
+from flask_wtf import FlaskForm 
+from wtforms import SelectField
 
+app = Flask(__name__)
+app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 
 class Form(FlaskForm):
-    state = SelectField('state', choices=[('cpp', 'C++'), ('py', 'Python'), ('text', 'Plain Text')])
-    city = SelectField('city', choices=[('cpp', 'C++'), ('py', 'Python'), ('text', 'Plain Text')])
+    captured = SelectField('captured', choices=[('sub1', 'Subject1'), ('sub2', 'Subject2'), ('sub3', 'Subject3')])
+    template = SelectField('template', choices=[('sub1', 'Subject1'), ('sub2', 'Subject2'), ('sub3', 'Subject3')])
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     form = Form()
-    # form.city.choices = [(city.id, city.name) for city in City.query.filter_by(state='CA').all()]
 
     if request.method == 'POST':
-    #     # city = City.query.filter_by(id=form.city.data).first()
-        return '<h1>State: {}, City: {}</h1>'.format(form.state.data, form.city.data)
+        return render_template('result.html', captured=form.captured.data, template=form.template.data)
 
     return render_template('landingpage2.html', form=form)
 
-    # <form method="POST">
-    #     {{ form.csrf_token }}
-    #     {{ form.state }}
-    #     {{ form.city }}
-    #     <input type="submit">
-    # </form>
+@app.route('/result')
+def result():
+    # form = Form()
+
+    # if request.method == 'POST':
+    #     return '<h1>Captured: {}, Template: {}</h1>'.format(form.captured.data, form.template.data)
+
+    return render_template('result.html')
+if __name__ == '__main__':
+    app.run(debug=True)
