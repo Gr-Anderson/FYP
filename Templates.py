@@ -1,6 +1,8 @@
 import sqlite3
 import json
 import cv2
+import numpy as np
+
 
 class Templates:
     
@@ -151,7 +153,7 @@ class Templates:
         return feature_to_match
     
     
-    def show_image(self):
+    def show_image(self, captured_ecg):
         cv2.imshow('Detected',captured_ecg)
         cv2.waitKey(0) & 0xFF
         cv2.destroyAllWindows()
