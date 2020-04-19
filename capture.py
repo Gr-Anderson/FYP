@@ -4,16 +4,17 @@ import matplotlib.pyplot as plt
 
 import time
 
-serial_data = serial.Serial("/dev/ttyACM0", 9600)
+# serial_data = serial.Serial("/dev/ttyACM0", 9600)
 
 serial_list = []
 
 
-def capture_signal():
+def capture_signal(serial_data = serial.Serial("/dev/ttyACM2", 9600), capture_time = 5):
     # time in seconds to capture the ecg signal
-    capture_time = 5
+    
 
     t_end = time.time() + capture_time
+
     while time.time() < t_end:
         while serial_data.inWaiting() == 0:
             pass

@@ -1,0 +1,336 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>biosigs module &mdash; My_Big_Old_test_docs 0.255262788229 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> My_Big_Old_test_docs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">biosigs module</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">My_Big_Old_test_docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>biosigs module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/biosigs.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-biosigs">
+<span id="biosigs-module"></span><h1>biosigs module<a class="headerlink" href="#module-biosigs" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="biosigs.BiometricSignal">
+<em class="property">class </em><code class="sig-prename descclassname">biosigs.</code><code class="sig-name descname">BiometricSignal</code><a class="headerlink" href="#biosigs.BiometricSignal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class used to represent an ECG signal</p>
+<p>…</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>captured_signal_csv -&gt; str</strong></dt><dd><p>a string representing a path to a csv file</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 63%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>capture_signal()</strong></p></td>
+<td><p>Captures an ECG signal with an Arduino and AD8232</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>output_signal_to_csv()</strong></p></td>
+<td><p>Outputs the signal captured to a csv name in ‘captured_signal_csv’</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>filter_captured_signal(sound=None)</strong></p></td>
+<td><p>Filters the ECG to reduce noise</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>amend_signal(filtered_signal)</strong></p></td>
+<td><p>Removes start and end of signal which are usually very noisy</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>find_r_peaks(amended_signal)</strong></p></td>
+<td><p>Finds the R-peaks in the signal</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="biosigs.BiometricSignal.amend_signal">
+<code class="sig-name descname">amend_signal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">start</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">end</span><span class="o">=</span><span class="default_value">- 100</span></em><span class="sig-paren">)</span><a class="headerlink" href="#biosigs.BiometricSignal.amend_signal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the begining and end of a filtered signal</p>
+<p>Sometimes there can be a lot of noise at the start and of a ECG
+signal which the <cite>filter_captured_signal</cite> function is unable to remove.
+The noise is caused by connecting to and from the capture device. This
+function takes care of that of that noise by removing the start and end of
+the captured ECG signal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>start -&gt; int, optinal</strong></dt><dd><p>The position to start the clip the ECG signal from, default is 100</p>
+</dd>
+<dt><strong>end -&gt; int, optional</strong></dt><dd><p>The position to end the clip of the ECG signal, default is 100</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>self.amended_signal -&gt; numpy.ndarray</dt><dd><p>An ammended version of <cite>filtered_signal</cite></p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosigs.BiometricSignal.capture_signal">
+<code class="sig-name descname">capture_signal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#biosigs.BiometricSignal.capture_signal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Captures ECG signal from Arduino and AD8232.</p>
+<p>This function captures an ECG signal with an Arduino and AD8232
+on the port specified in <cite>serial_data</cite>. Before it begins capturing,
+there is a small delay (e.g. 2 seconds) to allow the user to get
+comfortable. After this delay it will capture the ECG signal and
+assign it to the list <cite>self.captured_ecg</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>serial_data -&gt; serial.serialposix.Serial, optinal</strong></dt><dd><p>Identifies the port to record the ECG signal, default is
+serial.Serial(“/dev/ttyACM2”, 9600)</p>
+</dd>
+<dt><strong>capture_time -&gt; int, optional</strong></dt><dd><p>Time in seconds to capture ECG signal for, default is 5</p>
+</dd>
+<dt><strong>start_delay -&gt; numpy.ndarray</strong></dt><dd><p>Time in seconds to delay before recording starts, default is 2</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosigs.BiometricSignal.captured_signal_csv">
+<code class="sig-name descname">captured_signal_csv</code><em class="property"> = './assets/subject_raw_ecg.csv'</em><a class="headerlink" href="#biosigs.BiometricSignal.captured_signal_csv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="biosigs.BiometricSignal.filter_captured_signal">
+<code class="sig-name descname">filter_captured_signal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#biosigs.BiometricSignal.filter_captured_signal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduces noise in the signal.</p>
+<p>Reduces noise which in picked up when recording an ECG signal.
+It uses a Butterworth filter to remove jagged parts of the signal
+and smoothen it give a more truer represtation of the ECG signal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>self.filtered_signal -&gt; numpy.ndarray</dt><dd><p>A filtered version of the captured ECG signal</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosigs.BiometricSignal.find_r_peaks">
+<code class="sig-name descname">find_r_peaks</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">threshold</span><span class="o">=</span><span class="default_value">400</span></em><span class="sig-paren">)</span><a class="headerlink" href="#biosigs.BiometricSignal.find_r_peaks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the R-peaks in an amended signal</p>
+<p>This function finds the R-peaks in an amended signal. R-peaks are 
+the highest part of a signal so it uses a threshold to illimitate lower
+unnesscary features which may be picked up as a false positive.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>threshold -&gt; int, optinal</strong></dt><dd><p>The position to start looking for R-peaks from, default is 400</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>self.r_peaks -&gt; tuple</dt><dd><p>A tuple containing the positions of the R-peaks</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosigs.BiometricSignal.output_signal_to_csv">
+<code class="sig-name descname">output_signal_to_csv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#biosigs.BiometricSignal.output_signal_to_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Coverts <cite>self.captured_ecg</cite> to a csv</p>
+<p>This function converts the list <cite>self.captured_ecg</cite> to a csv and
+saves it to the location set in <cite>captured_signal_csv</cite>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Me, myself and I
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
