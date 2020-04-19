@@ -5,3 +5,4 @@ sphnix2
    :maxdepth: 4
 
    biosigs
+   segment

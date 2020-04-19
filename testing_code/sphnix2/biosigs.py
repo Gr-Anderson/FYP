@@ -6,7 +6,7 @@ class BiometricSignal:
 
     Attributes
     ----------
-    captured_signal_csv -> str
+    captured_signal_csv : str
         a string representing a path to a csv file
 
     Methods
@@ -31,13 +31,13 @@ class BiometricSignal:
         """
         Parameters
         ----------
-        captured_ecg -> list
+        captured_ecg : list
             List containing the ECG captured by the Arduino and AD8232
-        filtered_signal -> numpy.ndarray
+        filtered_signal : numpy.ndarray
             The signal with most of the noise removed
-        amended_signal -> numpy.ndarray
+        amended_signal : numpy.ndarray
             The signal with the start and the end removed
-        r_peaks -> tuple
+        r_peaks : tuple
             Contains the positions of the R-peaks in the signal
         """
         
@@ -58,12 +58,12 @@ class BiometricSignal:
         
         Parameters
         ----------
-        serial_data -> serial.serialposix.Serial, optinal
+        serial_data : serial.serialposix.Serial, optinal
             Identifies the port to record the ECG signal, default is
             serial.Serial("/dev/ttyACM2", 9600)
-        capture_time -> int, optional
+        capture_time : int, optional
             Time in seconds to capture ECG signal for, default is 5 
-        start_delay -> numpy.ndarray
+        start_delay : numpy.ndarray
             Time in seconds to delay before recording starts, default is 2
 
         """
@@ -113,7 +113,7 @@ class BiometricSignal:
         
         Returns
         -------
-        self.filtered_signal -> numpy.ndarray
+        self.filtered_signal : numpy.ndarray
             A filtered version of the captured ECG signal 
 
         """
@@ -135,14 +135,14 @@ class BiometricSignal:
         
         Parameters
         ----------
-        start -> int, optinal
+        start : int, optinal
             The position to start the clip the ECG signal from, default is 100
-        end -> int, optional
+        end : int, optional
             The position to end the clip of the ECG signal, default is 100
             
         Returns
         -------
-        self.amended_signal -> numpy.ndarray
+        self.amended_signal : numpy.ndarray
             An ammended version of `filtered_signal` 
             
         """
@@ -160,12 +160,12 @@ class BiometricSignal:
         
         Parameters
         ----------
-        threshold -> int, optinal
+        threshold : int, optinal
             The position to start looking for R-peaks from, default is 400
             
         Returns
         -------
-        self.r_peaks -> tuple
+        self.r_peaks : tuple
             A tuple containing the positions of the R-peaks 
             
         """
