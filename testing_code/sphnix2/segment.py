@@ -1,3 +1,7 @@
+import numpy as np
+from scipy.signal import argrelextrema
+
+
 class Segment:
     """
     A segment is a section of an ECG signal between two neighbouring R-peaks
@@ -6,21 +10,17 @@ class Segment:
     
     Attributes
     ----------
-    no_of_segments -> int
+    no_of_segments : int
         a int representing the number of segemnts to overlay
         
     Methods
     -------
     combining_segments()
         Combines multiple segments, overlayed on each other
-    get_mean_of_segments()
-        Finds the mean of multiple segments
-    standardise_mean_segment()
-        Standardises a mean segment for processing
-    features_lower()
-        The lower side unique features of a segment
-    features_higher()
-        The higher side unique features of a segment
+    find_features_lower()
+        Finds the lower unique features of a segment
+    find_features_higher()
+        Finds the higher unique features of a segment
     """
     
     no_of_segments = 5
@@ -30,34 +30,31 @@ class Segment:
         """
         Parameters
         ----------
-        bio_signal -> BiometricSignal
+        bio_signal : BiometricSignal
             An ECG signal object
-        combined_seg -> numpy.ndarray
+        combined_seg : numpy.ndarray
             Contains multiple segments overlayed on each other 
-        mean_segment -> numpy.ndarray
-            The result of combining multiple segments
-        standardised_mean_segment -> numpy.ndarray
-            Standareised mean segment, standisatin in nesscessary for processing
+        features_lower() : tuple
+            The lower side unique features of a segment
+        features_higher() : tuple
+            The higher side unique features of a segment
         """
         
         self.bio_signal = bio_signal
         self.combined_seg = self.combining_segments()
-        self.mean_segment = self.get_mean_of_segments()
-        self.standardised_mean_segment = self.standardise_mean_segment()
         self.features_lower = self.find_features_lower()
         self.features_higher = self.find_features_higher()
 
 
     def combining_segments(self):
-        r"""Combines multiple segments, overlayed on each other
+        r"""Combines multiple segments, overlayed on one another
 
         This function combines multiple neighbouring R-peaks and overlays them
-        to form a single segment. This is the first step in finding a mean
-        segment.
+        to form a single segment. This an average over multiple segments.
                    
         Returns
         -------
-        combined_seg -> numpy.ndarray
+        combined_seg : numpy.ndarray
             A numpy array containing multiple segments overlayed on one another
         """
         
@@ -68,7 +65,7 @@ class Segment:
             segment_start = self.bio_signal.r_peaks[0][i]
             segment_end = self.bio_signal.r_peaks[0][i+1]
 
-            extracted_segment = self.bio_signal.amended_signal[segment_start:segment_end]
+            extracted_segment = self.bio_signal.standardised_signal[segment_start:segment_end]
             if smallest_seg == None:
                 smallest_seg = len(extracted_segment)
             elif (len(extracted_segment) < smallest_seg):
@@ -86,46 +83,7 @@ class Segment:
         combined_seg = combined_seg[0:smallest_seg]
         return combined_seg
                 
-
-    def get_mean_of_segments(self):
-        r"""Finds the mean of multiple segments
-
-        This function finds the mean segment by looping through each element in
-        the combined segment and dividing it by `no_of_segments`
-
-        mean_segment -> numpy.ndarray
-            A numpy array containing the mean segment of the combined segments
-        """
-        
-        mean_segment = np.array([])
-        
-        for k in range (0, len(self.combined_seg)):
-            mean_segment = np.append (mean_segment, self.combined_seg[k] / self.no_of_segments)
-            
-        return mean_segment
-
-    
-    def standardise_mean_segment(self):
-        r"""Standardises a mean segment for processing
-
-        This function is required because not all ECG signals don't start at zero. The
-        lowest value is found and this is subtracted from every element in the
-        mean segment.
-            
-        Returns
-        -------
-        standardised_mean_segment -> numpy.ndarray
-            Standareised mean segment, standisatin in nesscessary for processing
-        """        
-        
-        standardised_mean_segment = np.array([])
-        
-        min_of_mean_segment = min(self.mean_segment)
-        for value in range(0, len(self.mean_segment)):
-            standardised_mean_segment = np.append (standardised_mean_segment, self.mean_segment[value] - min_of_mean_segment)
-
-        return standardised_mean_segment
-    
+   
     def find_features_lower(self):
         r"""Finds the lower unique features of a segment
 
@@ -141,8 +99,8 @@ class Segment:
             A tuple containing the positions of lower unique features. 
         """
         
-        features_lower = argrelextrema(self.mean_segment, np.less, order=5)
-        self.features_lower = (features_lower[0],self.mean_segment[features_lower[0]])       
+        features_lower = argrelextrema(self.combined_seg, np.less, order=5)
+        self.features_lower = (features_lower[0],self.combined_seg[features_lower[0]])       
         return self.features_lower
 
 
@@ -161,8 +119,6 @@ class Segment:
             A tuple containing the positions of higher unique features. 
         """
         
-        features_higher = argrelextrema(self.mean_segment, np.greater, order=5)
-        self.features_higher = (features_higher[0],self.mean_segment[features_higher[0]]) 
+        features_higher = argrelextrema(self.combined_seg, np.greater, order=5)
+        self.features_higher = (features_higher[0],self.combined_seg[features_higher[0]]) 
         return self.features_higher
-
-     

@@ -4,8 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>segment module &#8212; DEMO 1.11111 documentation</title>
-    <link rel="stylesheet" href="_static/bootstrap-astropy.css" type="text/css" />
+    <title>segment module &#8212; ECG Biometric Athentication 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -13,45 +13,22 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/language_data.js"></script>
-    <script type="text/javascript" src="_static/sidebar.js"></script>
-    <script type="text/javascript" src="_static/copybutton.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600' rel='stylesheet' type='text/css'/>
-
-  </head><body>
-<div class="topbar">
-  <a class="brand" title="Documentation Home" href="index.html"><span id="logotext1">astro</span><span id="logotext2">py</span><span id="logotext3">:docs</span></a>
-  <ul>
     
-    <li><a class="homelink" title="Astropy Homepage" href="http://www.astropy.org"></a></li>
-    <li><a title="General Index" href="genindex.html">Index</a></li>
-    <li><a title="Module Index" href="py-modindex.html">Modules</a></li>
-    <li>
-      
-      
-<form action="search.html" method="get">
-  <input type="text" name="q" placeholder="Search" />
-  <input type="hidden" name="check_keywords" value="yes" />
-  <input type="hidden" name="area" value="default" />
-</form>
-      
-    </li>
-  </ul>
-</div>
-
-<div class="related">
-    <h3>Navigation</h3>
-    <ul>
-      <li>
-	<a href="index.html">DEMO 1.11111 documentation</a>
-	 &#187;
-      </li>
-      
-       
-    </ul>
-</div>
-  
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ECG Biometric Athentication 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -69,7 +46,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>no_of_segments -&gt; int</strong></dt><dd><p>a int representing the number of segemnts to overlay</p>
+<dt><strong>no_of_segments</strong><span class="classifier">int</span></dt><dd><p>a int representing the number of segemnts to overlay</p>
 </dd>
 </dl>
 </dd>
@@ -77,38 +54,31 @@
 <p class="rubric">Methods</p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 37%" />
-<col style="width: 63%" />
+<col style="width: 34%" />
+<col style="width: 66%" />
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><strong>combining_segments()</strong></p></td>
 <td><p>Combines multiple segments, overlayed on each other</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>get_mean_of_segments()</strong></p></td>
-<td><p>Finds the mean of multiple segments</p></td>
+<tr class="row-even"><td><p><strong>find_features_lower()</strong></p></td>
+<td><p>Finds the lower unique features of a segment</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>standardise_mean_segment()</strong></p></td>
-<td><p>Standardises a mean segment for processing</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>features_lower()</strong></p></td>
-<td><p>The lower side unique features of a segment</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>features_higher()</strong></p></td>
-<td><p>The higher side unique features of a segment</p></td>
+<tr class="row-odd"><td><p><strong>find_features_higher()</strong></p></td>
+<td><p>Finds the higher unique features of a segment</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py method">
 <dt id="segment.Segment.combining_segments">
 <code class="sig-name descname">combining_segments</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#segment.Segment.combining_segments" title="Permalink to this definition">¶</a></dt>
-<dd><p>Combines multiple segments, overlayed on each other</p>
+<dd><p>Combines multiple segments, overlayed on one another</p>
 <p>This function combines multiple neighbouring R-peaks and overlays them
-to form a single segment. This is the first step in finding a mean
-segment.</p>
+to form a single segment. This an average over multiple segments.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><dl class="simple">
-<dt>combined_seg -&gt; numpy.ndarray</dt><dd><p>A numpy array containing multiple segments overlayed on one another</p>
+<dt><strong>combined_seg</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>A numpy array containing multiple segments overlayed on one another</p>
 </dd>
 </dl>
 </dd>
@@ -153,39 +123,10 @@ labels that point as a feature and stores it in a tuple.</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="segment.Segment.get_mean_of_segments">
-<code class="sig-name descname">get_mean_of_segments</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#segment.Segment.get_mean_of_segments" title="Permalink to this definition">¶</a></dt>
-<dd><p>Finds the mean of multiple segments</p>
-<p>This function finds the mean segment by looping through each element in
-the combined segment and dividing it by <cite>no_of_segments</cite></p>
-<dl class="simple">
-<dt>mean_segment -&gt; numpy.ndarray</dt><dd><p>A numpy array containing the mean segment of the combined segments</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py attribute">
 <dt id="segment.Segment.no_of_segments">
 <code class="sig-name descname">no_of_segments</code><em class="property"> = 5</em><a class="headerlink" href="#segment.Segment.no_of_segments" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-
-<dl class="py method">
-<dt id="segment.Segment.standardise_mean_segment">
-<code class="sig-name descname">standardise_mean_segment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#segment.Segment.standardise_mean_segment" title="Permalink to this definition">¶</a></dt>
-<dd><p>Standardises a mean segment for processing</p>
-<p>This function is required because not all ECG signals don’t start at zero. The
-lowest value is found and this is subtracted from every element in the
-mean segment.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><dl class="simple">
-<dt>standardised_mean_segment -&gt; numpy.ndarray</dt><dd><p>Standareised mean segment, standisatin in nesscessary for processing</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
 
 </dd></dl>
 
@@ -196,12 +137,7 @@ mean segment.</p>
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><h3>Page Contents</h3>
-<ul>
-<li><a class="reference internal" href="#">segment module</a></li>
-</ul>
-
-
+        <div class="sphinxsidebarwrapper">
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -209,24 +145,35 @@ mean segment.</p>
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<form action="search.html" method="get">
-  <input type="text" name="q" placeholder="Search" />
-  <input type="hidden" name="check_keywords" value="yes" />
-  <input type="hidden" name="area" value="default" />
-</form>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-<footer class="footer">
-  <p class="pull-right">
-    <a href="_sources/segment.rst.txt"
-       rel="nofollow">Page Source</a> &nbsp;
-    <a href="#">Back to Top</a></p>
-  <p>
-    &copy; Copyright 2020, the man.<br/>
-    Created using <a href="http://www.sphinx-doc.org/en/stable/">Sphinx</a> 3.0.1. &nbsp;
-  </p>
-</footer>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ECG Biometric Athentication 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Sam Power.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.1.
+    </div>
   </body>
 </html>

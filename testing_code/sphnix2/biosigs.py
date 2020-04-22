@@ -1,3 +1,10 @@
+import serial
+import time
+import pandas as pd
+from scipy import signal
+import numpy as np
+from scipy.signal import argrelextrema
+
 class BiometricSignal: 
     """
     A class used to represent an ECG signal
@@ -15,17 +22,17 @@ class BiometricSignal:
         Captures an ECG signal with an Arduino and AD8232
     output_signal_to_csv()
         Outputs the signal captured to a csv name in 'captured_signal_csv'
-    filter_captured_signal(sound=None)
+    filter_captured_signal()
         Filters the ECG to reduce noise
     amend_signal(filtered_signal)
         Removes start and end of signal which are usually very noisy
+    standardise_signal()
+        Resets the Y axis to start at zero
     find_r_peaks(amended_signal)
         Finds the R-peaks in the signal
     """
     
     captured_signal_csv = "./assets/subject_raw_ecg.csv"
-#     captured_signal_csv = "./subject2.csv"
-#     captured_signal_csv = "./subject3a.csv"
 
     def __init__(self):
         """
@@ -44,47 +51,48 @@ class BiometricSignal:
         self.captured_ecg = []
         self.filtered_signal = np.ndarray([])
         self.amended_signal = np.ndarray([])
+        self.standardised_signal = np.ndarray([])
         self.r_peaks = ()
         
         
-    def capture_signal(self):
-        r"""Captures ECG signal from Arduino and AD8232.
+    # def capture_signal(self, serial_data = serial.Serial("/dev/ttyACM2", 9600), capture_time = 5, start_delay = 2):
+#         r"""Captures ECG signal from Arduino and AD8232.
 
-        This function captures an ECG signal with an Arduino and AD8232
-        on the port specified in `serial_data`. Before it begins capturing,
-        there is a small delay (e.g. 2 seconds) to allow the user to get
-        comfortable. After this delay it will capture the ECG signal and
-        assign it to the list `self.captured_ecg`.
+#         This function captures an ECG signal with an Arduino and AD8232
+#         on the port specified in `serial_data`. Before it begins capturing,
+#         there is a small delay (e.g. 2 seconds) to allow the user to get
+#         comfortable. After this delay it will capture the ECG signal and
+#         assign it to the list `self.captured_ecg`.
         
-        Parameters
-        ----------
-        serial_data : serial.serialposix.Serial, optinal
-            Identifies the port to record the ECG signal, default is
-            serial.Serial("/dev/ttyACM2", 9600)
-        capture_time : int, optional
-            Time in seconds to capture ECG signal for, default is 5 
-        start_delay : numpy.ndarray
-            Time in seconds to delay before recording starts, default is 2
+#         Parameters
+#         ----------
+#         serial_data : serial.serialposix.Serial, optinal
+#             Identifies the port to record the ECG signal, default is
+#             serial.Serial("/dev/ttyACM2", 9600)
+#         capture_time : int, optional
+#             Time in seconds to capture ECG signal for, default is 5 
+#         start_delay : int, optional
+#             Time in seconds to delay before recording starts, default is 2
 
-        """
+#         """
         
-        t_end = time.time() + capture_time
-        time.sleep(start_delay)
+#         t_end = time.time() + capture_time
+#         time.sleep(start_delay)
 
-        while time.time() < t_end:
-            while serial_data.inWaiting() == 0:
-                pass
-            temp_string = serial_data.readline()
-            serial_string = (
-                str(temp_string)
-                .replace("b", "")
-                .replace("'", "")
-                .replace("\\r", "")
-                .replace("\\n", "")
-            )
-            if len(serial_string) == 3:
-                self.captured_ecg.append(int(serial_string))
-#         return self.captured_ecg
+#         while time.time() < t_end:
+#             while serial_data.inWaiting() == 0:
+#                 pass
+#             temp_string = serial_data.readline()
+#             serial_string = (
+#                 str(temp_string)
+#                 .replace("b", "")
+#                 .replace("'", "")
+#                 .replace("\\r", "")
+#                 .replace("\\n", "")
+#             )
+#             if len(serial_string) == 3:
+#                 self.captured_ecg.append(int(serial_string))
+# #         return self.captured_ecg
 
 
     def output_signal_to_csv(self):
@@ -108,8 +116,8 @@ class BiometricSignal:
         r"""Reduces noise in the signal.
 
         Reduces noise which in picked up when recording an ECG signal.
-        It uses a Butterworth filter to remove jagged parts of the signal
-        and smoothen it give a more truer represtation of the ECG signal.
+        It uses a Butterworth filter to remen recordi parts of the signal
+        and smoothen it give a more truer ren recordin of the ECG signal.
         
         Returns
         -------
@@ -150,8 +158,27 @@ class BiometricSignal:
         self.amended_signal = self.filtered_signal[start:end]
         return self.amended_signal
     
-    def find_r_peaks(self, threshold = 400):
+    def standardise_signal(self):
+        r"""Resets the Y axis to start at zero
 
+        The Y axis on an ECG signal never starts at zero because there is
+        always some electrical activity from the heart. This function resets
+        this and starts the scale at zero for easier more accurate 
+        processing.
+            
+        Returns
+        -------
+        self.standardised_signal : numpy.ndarray
+            An standardised ECG signal
+            
+        """
+        
+        for i in range(0, len(self.amended_signal)):
+            self.standardised_signal = np.append (self.standardised_signal, self.amended_signal[i] - min(self.amended_signal))
+
+        return self.standardised_signal
+    
+    def find_r_peaks(self, threshold = 400):
         r"""Finds the R-peaks in an amended signal
 
         This function finds the R-peaks in an amended signal. R-peaks are 

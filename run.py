@@ -5,47 +5,62 @@
 # import cv2
 # import pandas as pd
 # import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 # from scipy import signal
 # from scipy.signal import argrelextrema
 from BiometricSignal import *
 from Segment import *
-from Features import *
+
 from Templates import *
+
+
+plt.style.use('seaborn')
+
+
+# fig2, ax2 = plt.subplots()
 
 
 # ----------------------------------------------------------------------------------------------
 #                               CODE FOR TESTING BiometricSignal
 # ----------------------------------------------------------------------------------------------
 
-TEST_signal = BiometricSignal()
-TEST_filtered_signal = TEST_signal.filter_captured_signal()
-TEST_amended_signal = TEST_signal.amend_signal(TEST_filtered_signal)
-TEST_r_peaks = TEST_signal.find_r_peaks(TEST_filtered_signal, TEST_amended_signal)
+biosig = BiometricSignal()
+biosig.filter_captured_signal()
+biosig.amend_signal()
+biosig.find_r_peaks()
+biosig.standardise_signal()
 
-# print (TEST_signal.r_peaks)
-# print(type(TEST_signal))
+fig1,ax1 = plt.subplots()
+ax1.plot(biosig.standardised_signal, color='#444444')
+ax1.set_title('Standardised ECG Signal')
+ax1.set_ylabel('Millivolts')
+ax1.set_xlabel('Time')
 
 # ----------------------------------------------------------------------------------------------
 #                               CODE FOR TESTING Segment
 # ----------------------------------------------------------------------------------------------
 
-TEST_segment = Segment(TEST_signal)
-# print(type(TEST_segment.standardised_mean_segment))
+seg = Segment(biosig)
+fig2, ax2 = plt.subplots()
+ax2.plot(seg.combined_seg, color='#444444')
+ax2.set_title('Mean Segment')
+ax2.set_ylabel('Millivolts')
+ax2.set_xlabel('Time')
 
 # ----------------------------------------------------------------------------------------------
-#                               CODE FOR TESTING Features
+#                               CODE FOR TESTING Templates
 # ----------------------------------------------------------------------------------------------
 
-TEST_features = Features(TEST_segment.mean_segment)
-# print(TEST_features.features_lower)
-# print(TEST_features.features_higher)
+templ = Templates('Sam')
+a_user_template = templ.get_template('Sam')
+fig3, ax3 = plt.subplots()
+ax3.plot(seg.combined_seg, color='#444444')
+ax3.set_title('An User\'s template')
+ax3.set_ylabel('Millivolts')
+ax3.set_xlabel('Time')
+plt.tight_layout()
+plt.show()
 
-# ----------------------------------------------------------------------------------------------
-#                               CODE FOR TESTING Features
-# ----------------------------------------------------------------------------------------------
-
-TEST_template = Templates()
 
 
 

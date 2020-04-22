@@ -4,8 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>biosigs module &#8212; DEMO 1.11111 documentation</title>
-    <link rel="stylesheet" href="_static/bootstrap-astropy.css" type="text/css" />
+    <title>biosigs module &#8212; ECG Biometric Athentication 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -13,45 +13,22 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/language_data.js"></script>
-    <script type="text/javascript" src="_static/sidebar.js"></script>
-    <script type="text/javascript" src="_static/copybutton.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600' rel='stylesheet' type='text/css'/>
-
-  </head><body>
-<div class="topbar">
-  <a class="brand" title="Documentation Home" href="index.html"><span id="logotext1">astro</span><span id="logotext2">py</span><span id="logotext3">:docs</span></a>
-  <ul>
     
-    <li><a class="homelink" title="Astropy Homepage" href="http://www.astropy.org"></a></li>
-    <li><a title="General Index" href="genindex.html">Index</a></li>
-    <li><a title="Module Index" href="py-modindex.html">Modules</a></li>
-    <li>
-      
-      
-<form action="search.html" method="get">
-  <input type="text" name="q" placeholder="Search" />
-  <input type="hidden" name="check_keywords" value="yes" />
-  <input type="hidden" name="area" value="default" />
-</form>
-      
-    </li>
-  </ul>
-</div>
-
-<div class="related">
-    <h3>Navigation</h3>
-    <ul>
-      <li>
-	<a href="index.html">DEMO 1.11111 documentation</a>
-	 &#187;
-      </li>
-      
-       
-    </ul>
-</div>
-  
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ECG Biometric Athentication 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -77,8 +54,8 @@
 <p class="rubric">Methods</p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 37%" />
-<col style="width: 63%" />
+<col style="width: 33%" />
+<col style="width: 67%" />
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><strong>capture_signal()</strong></p></td>
@@ -87,13 +64,16 @@
 <tr class="row-even"><td><p><strong>output_signal_to_csv()</strong></p></td>
 <td><p>Outputs the signal captured to a csv name in ‘captured_signal_csv’</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>filter_captured_signal(sound=None)</strong></p></td>
+<tr class="row-odd"><td><p><strong>filter_captured_signal()</strong></p></td>
 <td><p>Filters the ECG to reduce noise</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>amend_signal(filtered_signal)</strong></p></td>
 <td><p>Removes start and end of signal which are usually very noisy</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>find_r_peaks(amended_signal)</strong></p></td>
+<tr class="row-odd"><td><p><strong>standardise_signal()</strong></p></td>
+<td><p>Resets the Y axis to start at zero</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>find_r_peaks(amended_signal)</strong></p></td>
 <td><p>Finds the R-peaks in the signal</p></td>
 </tr>
 </tbody>
@@ -125,30 +105,6 @@ the captured ECG signal.</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="biosigs.BiometricSignal.capture_signal">
-<code class="sig-name descname">capture_signal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#biosigs.BiometricSignal.capture_signal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Captures ECG signal from Arduino and AD8232.</p>
-<p>This function captures an ECG signal with an Arduino and AD8232
-on the port specified in <cite>serial_data</cite>. Before it begins capturing,
-there is a small delay (e.g. 2 seconds) to allow the user to get
-comfortable. After this delay it will capture the ECG signal and
-assign it to the list <cite>self.captured_ecg</cite>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>serial_data</strong><span class="classifier">serial.serialposix.Serial, optinal</span></dt><dd><p>Identifies the port to record the ECG signal, default is
-serial.Serial(“/dev/ttyACM2”, 9600)</p>
-</dd>
-<dt><strong>capture_time</strong><span class="classifier">int, optional</span></dt><dd><p>Time in seconds to capture ECG signal for, default is 5</p>
-</dd>
-<dt><strong>start_delay</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>Time in seconds to delay before recording starts, default is 2</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py attribute">
 <dt id="biosigs.BiometricSignal.captured_signal_csv">
 <code class="sig-name descname">captured_signal_csv</code><em class="property"> = './assets/subject_raw_ecg.csv'</em><a class="headerlink" href="#biosigs.BiometricSignal.captured_signal_csv" title="Permalink to this definition">¶</a></dt>
@@ -159,8 +115,8 @@ serial.Serial(“/dev/ttyACM2”, 9600)</p>
 <code class="sig-name descname">filter_captured_signal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#biosigs.BiometricSignal.filter_captured_signal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reduces noise in the signal.</p>
 <p>Reduces noise which in picked up when recording an ECG signal.
-It uses a Butterworth filter to remove jagged parts of the signal
-and smoothen it give a more truer represtation of the ECG signal.</p>
+It uses a Butterworth filter to remen recordi parts of the signal
+and smoothen it give a more truer ren recordin of the ECG signal.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><dl class="simple">
@@ -202,6 +158,24 @@ unnesscary features which may be picked up as a false positive.</p>
 saves it to the location set in <cite>captured_signal_csv</cite>.</p>
 </dd></dl>
 
+<dl class="py method">
+<dt id="biosigs.BiometricSignal.standardise_signal">
+<code class="sig-name descname">standardise_signal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#biosigs.BiometricSignal.standardise_signal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the Y axis to start at zero</p>
+<p>The Y axis on an ECG signal never starts at zero because there is
+always some electrical activity from the heart. This function resets
+this and starts the scale at zero for easier more accurate 
+processing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>self.standardised_signal</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>An standardised ECG signal</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -211,12 +185,7 @@ saves it to the location set in <cite>captured_signal_csv</cite>.</p>
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><h3>Page Contents</h3>
-<ul>
-<li><a class="reference internal" href="#">biosigs module</a></li>
-</ul>
-
-
+        <div class="sphinxsidebarwrapper">
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -224,24 +193,35 @@ saves it to the location set in <cite>captured_signal_csv</cite>.</p>
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<form action="search.html" method="get">
-  <input type="text" name="q" placeholder="Search" />
-  <input type="hidden" name="check_keywords" value="yes" />
-  <input type="hidden" name="area" value="default" />
-</form>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-<footer class="footer">
-  <p class="pull-right">
-    <a href="_sources/biosigs.rst.txt"
-       rel="nofollow">Page Source</a> &nbsp;
-    <a href="#">Back to Top</a></p>
-  <p>
-    &copy; Copyright 2020, the man.<br/>
-    Created using <a href="http://www.sphinx-doc.org/en/stable/">Sphinx</a> 3.0.1. &nbsp;
-  </p>
-</footer>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ECG Biometric Athentication 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Sam Power.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.1.
+    </div>
   </body>
 </html>

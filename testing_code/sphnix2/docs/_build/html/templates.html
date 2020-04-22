@@ -4,8 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>templates module &#8212; DEMO 1.11111 documentation</title>
-    <link rel="stylesheet" href="_static/bootstrap-astropy.css" type="text/css" />
+    <title>templates module &#8212; ECG Biometric Athentication 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -13,45 +13,22 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/language_data.js"></script>
-    <script type="text/javascript" src="_static/sidebar.js"></script>
-    <script type="text/javascript" src="_static/copybutton.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600' rel='stylesheet' type='text/css'/>
-
-  </head><body>
-<div class="topbar">
-  <a class="brand" title="Documentation Home" href="index.html"><span id="logotext1">astro</span><span id="logotext2">py</span><span id="logotext3">:docs</span></a>
-  <ul>
     
-    <li><a class="homelink" title="Astropy Homepage" href="http://www.astropy.org"></a></li>
-    <li><a title="General Index" href="genindex.html">Index</a></li>
-    <li><a title="Module Index" href="py-modindex.html">Modules</a></li>
-    <li>
-      
-      
-<form action="search.html" method="get">
-  <input type="text" name="q" placeholder="Search" />
-  <input type="hidden" name="check_keywords" value="yes" />
-  <input type="hidden" name="area" value="default" />
-</form>
-      
-    </li>
-  </ul>
-</div>
-
-<div class="related">
-    <h3>Navigation</h3>
-    <ul>
-      <li>
-	<a href="index.html">DEMO 1.11111 documentation</a>
-	 &#187;
-      </li>
-      
-       
-    </ul>
-</div>
-  
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ECG Biometric Athentication 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -69,14 +46,14 @@
 <p class="rubric">Methods</p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 61%" />
-<col style="width: 39%" />
+<col style="width: 56%" />
+<col style="width: 44%" />
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><strong>create_table()</strong></p></td>
 <td><p>Creates the templates table in the database if it doesn’t already exist</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>add_entry_to_database(self, features_lower, features_higher, standardised_mean_segment, x_length, y_length)</strong></p></td>
+<tr class="row-even"><td><p><strong>add_entry_to_database(features_lower, features_higher, combined_seg, x_length, y_length)</strong></p></td>
 <td><p>Adds a record to the database</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>convert_features_to_percentages(features, length)</strong></p></td>
@@ -97,17 +74,14 @@
 <tr class="row-even"><td><p><strong>get_start_end_locations(self, feature_x, feature_y, image_width, image_height)</strong></p></td>
 <td><p>Uses a feature to determine a area to check for a match</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>get_feature_location(self, x, y, image_width, image_height)</strong></p></td>
-<td><p>ddddd</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>get_feature_from_template(self, db_template_ecg, x_start, x_end, y_start, y_end)</strong></p></td>
-<td><p>sssssss</p></td>
+<tr class="row-odd"><td><p><strong>create_image(biosignal, name):</strong></p></td>
+<td><p>Converts a combined segment to a image for template matching</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py method">
 <dt id="templates.Templates.add_entry_to_database">
-<code class="sig-name descname">add_entry_to_database</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">features_lower</span></em>, <em class="sig-param"><span class="n">features_higher</span></em>, <em class="sig-param"><span class="n">standardised_mean_segment</span></em>, <em class="sig-param"><span class="n">x_length</span></em>, <em class="sig-param"><span class="n">y_length</span></em><span class="sig-paren">)</span><a class="headerlink" href="#templates.Templates.add_entry_to_database" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add_entry_to_database</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">features_lower</span></em>, <em class="sig-param"><span class="n">features_higher</span></em>, <em class="sig-param"><span class="n">combined_seg</span></em>, <em class="sig-param"><span class="n">x_length</span></em>, <em class="sig-param"><span class="n">y_length</span></em><span class="sig-paren">)</span><a class="headerlink" href="#templates.Templates.add_entry_to_database" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds a record to the database</p>
 <p>Adds a new user to the database. It starts by converting the feature locations
 to percentages for both the lower and higher features. This standardises the 
@@ -122,7 +96,7 @@ mean segment.</p>
 </dd>
 <dt><strong>features_higher</strong><span class="classifier">tuple</span></dt><dd><p>A tuple containing the positions of higher unique features.</p>
 </dd>
-<dt><strong>standardised_mean_segment</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>Standareised mean segment, standisatin in nesscessary for processing</p>
+<dt><strong>combined_seg</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>Standareised mean segment, standisatin in nesscessary for processing</p>
 </dd>
 <dt><strong>x_length</strong><span class="classifier">int</span></dt><dd><p>The length of the X axis</p>
 </dd>
@@ -138,13 +112,16 @@ mean segment.</p>
 <code class="sig-name descname">convert_features_to_percentages</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">features</span></em>, <em class="sig-param"><span class="n">length</span></em><span class="sig-paren">)</span><a class="headerlink" href="#templates.Templates.convert_features_to_percentages" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts a feature’s location to a percentage</p>
 <p>Converts the location of a feature to a percentage for
-standardisaion. Standardisation helps with template matching.</p>
+standardisaion. When converted to an image for template matching,
+if there is any slight difference in image size, OpenCV will
+not work. Using the x,y position of a feature as a percentage, rather
+than its true x,y corordinate in relation to the image helps solve this.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>features</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>description</p>
+<dt><strong>features</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>An array containing the features</p>
 </dd>
-<dt><strong>length</strong><span class="classifier">int</span></dt><dd><p>The length of the features</p>
+<dt><strong>length</strong><span class="classifier">int</span></dt><dd><p>The length of the features array</p>
 </dd>
 </dl>
 </dd>
@@ -158,11 +135,29 @@ standardisaion. Standardisation helps with template matching.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="templates.Templates.create_image">
+<code class="sig-name descname">create_image</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">biosignal</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#templates.Templates.create_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an image for OpenCV to use in template matching</p>
+<p>OpenCV requires images for template matching. This converts a
+combined segemnt to image, and saves it to the assets folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>biosignal</strong><span class="classifier">Segment.combined_seg</span></dt><dd><p>The segment to to made into an image</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>The name of segment, either capture or template</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="templates.Templates.create_table">
 <code class="sig-name descname">create_table</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#templates.Templates.create_table" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates the templates table in the database if it doesn’t already exist</p>
 <p>Checks to see if table for the templates exists and creates it if it doesn’t.
-The table contains the name, mean_segment, features along the X axis and 
+The table contains the name, combined_seg, features along the X axis and 
 features along the Y axis</p>
 </dd></dl>
 
@@ -189,60 +184,13 @@ returns a bool.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="templates.Templates.get_feature_from_template">
-<code class="sig-name descname">get_feature_from_template</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">db_template_ecg</span></em>, <em class="sig-param"><span class="n">x_start</span></em>, <em class="sig-param"><span class="n">x_end</span></em>, <em class="sig-param"><span class="n">y_start</span></em>, <em class="sig-param"><span class="n">y_end</span></em><span class="sig-paren">)</span><a class="headerlink" href="#templates.Templates.get_feature_from_template" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets feature from template to check</p>
-<p>Converts a feature location to a percentage for standardisaion.
-Standardisation makes template matching more accurate.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>name</strong><span class="classifier">type</span></dt><dd><p>description</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>name</strong><span class="classifier">type</span></dt><dd><p>description</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="templates.Templates.get_feature_location">
-<code class="sig-name descname">get_feature_location</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">image_width</span></em>, <em class="sig-param"><span class="n">image_height</span></em><span class="sig-paren">)</span><a class="headerlink" href="#templates.Templates.get_feature_location" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts a feature location to a percentage</p>
-<p>Converts a feature location to a percentage for standardisaion.
-Standardisation makes template matching more accurate.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>x</strong><span class="classifier">int</span></dt><dd><p>description</p>
-</dd>
-<dt><strong>y</strong><span class="classifier">int</span></dt><dd><p>description</p>
-</dd>
-<dt><strong>image_width</strong><span class="classifier">int</span></dt><dd><p>description</p>
-</dd>
-<dt><strong>image_height</strong><span class="classifier">int</span></dt><dd><p>description</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>feature_x</strong><span class="classifier">int</span></dt><dd><p>description</p>
-</dd>
-<dt><strong>feature_y</strong><span class="classifier">int</span></dt><dd><p>description</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
+<dt id="templates.Templates.get_feature_to_match">
+<code class="sig-name descname">get_feature_to_match</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">template_ecg</span></em>, <em class="sig-param"><span class="n">xpos</span></em>, <em class="sig-param"><span class="n">image_height</span></em><span class="sig-paren">)</span><a class="headerlink" href="#templates.Templates.get_feature_to_match" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="templates.Templates.get_start_end_locations">
-<code class="sig-name descname">get_start_end_locations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">feature_x</span></em>, <em class="sig-param"><span class="n">feature_y</span></em>, <em class="sig-param"><span class="n">image_width</span></em>, <em class="sig-param"><span class="n">image_height</span></em><span class="sig-paren">)</span><a class="headerlink" href="#templates.Templates.get_start_end_locations" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_start_end_locations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">feature_x</span></em>, <em class="sig-param"><span class="n">feature_y</span></em><span class="sig-paren">)</span><a class="headerlink" href="#templates.Templates.get_start_end_locations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Identifies area to check on the template</p>
 <p>The features are a single point on the segment, this function
 takes the area around that point to include in the template match
@@ -292,7 +240,7 @@ returns the result if there is one.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>standardised_mean_segment</strong><span class="classifier">list</span></dt><dd><p>The users segment</p>
+<dt><strong>combined_seg</strong><span class="classifier">list</span></dt><dd><p>The users segment</p>
 </dd>
 <dt><strong>featuresX</strong><span class="classifier">list</span></dt><dd><p>The X cordinates of the the features</p>
 </dd>
@@ -327,7 +275,7 @@ returns the result if there is one.</p>
 
 <dl class="py method">
 <dt id="templates.Templates.template_matching">
-<code class="sig-name descname">template_matching</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#templates.Templates.template_matching" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">template_matching</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">captured_seg</span></em><span class="sig-paren">)</span><a class="headerlink" href="#templates.Templates.template_matching" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compares the captured template with the one in the database</p>
 <p>Compares the captured template with the one in the database. Loops
 through each each feature of the captured ECG signal and compares
@@ -351,12 +299,7 @@ it to that in the database.</p>
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><h3>Page Contents</h3>
-<ul>
-<li><a class="reference internal" href="#">templates module</a></li>
-</ul>
-
-
+        <div class="sphinxsidebarwrapper">
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -364,24 +307,35 @@ it to that in the database.</p>
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<form action="search.html" method="get">
-  <input type="text" name="q" placeholder="Search" />
-  <input type="hidden" name="check_keywords" value="yes" />
-  <input type="hidden" name="area" value="default" />
-</form>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-<footer class="footer">
-  <p class="pull-right">
-    <a href="_sources/templates.rst.txt"
-       rel="nofollow">Page Source</a> &nbsp;
-    <a href="#">Back to Top</a></p>
-  <p>
-    &copy; Copyright 2020, the man.<br/>
-    Created using <a href="http://www.sphinx-doc.org/en/stable/">Sphinx</a> 3.0.1. &nbsp;
-  </p>
-</footer>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ECG Biometric Athentication 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Sam Power.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.1.
+    </div>
   </body>
 </html>

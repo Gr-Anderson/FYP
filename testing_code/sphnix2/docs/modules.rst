@@ -6,3 +6,4 @@ sphnix2
 
    biosigs
    segment
+   templates
